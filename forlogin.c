@@ -7,13 +7,13 @@
 
 FILE *fp;
 
-char ID[13];//ÕËºÅ
-char Passworda[13];//ÃÜÂë
-char Passwordb[13];//ÓÃÓÚÔÙ´ÎÊäÈëÈ·ÈÏÃÜÂë
-char thePermission;//È¨ÏŞµÈ¼¶
-int IDnums = 0;//ÓÃ»§¸öÊı
+char ID[13];//è´¦å·
+char Passworda[13];//å¯†ç 
+char Passwordb[13];//ç”¨äºå†æ¬¡è¾“å…¥ç¡®è®¤å¯†ç 
+char thePermission;//æƒé™ç­‰çº§
+int IDnums = 0;//ç”¨æˆ·ä¸ªæ•°
 
-//º¯Êı·µ»ØÖµÎª1Ôò´ú±í¸ñÊ½ÕıÈ·¡£
+//å‡½æ•°è¿”å›å€¼ä¸º1åˆ™ä»£è¡¨æ ¼å¼æ­£ç¡®ã€‚
 int judgeNumsFormat() {
 	int i;
 	for (i = 0; ID[i] != '\0'; i++) {
@@ -54,27 +54,27 @@ void mSignUp() {
 	fp=fopen("database.txt", "a");
 
 	if (fp == NULL) {
-		printf("ÎÄ¼şĞ´ÈëÊ§°Ü£¡");
+		printf("æ–‡ä»¶å†™å…¥å¤±è´¥ï¼");
 		fclose(fp);
 		return;
 	}
 
 	while (true)
 	{
-		printf("ÇëÊäÈë6-13Î»´¿Êı×ÖÕËºÅ£º  ");//ÕâÀï»¹ÓĞÒ»¸öÕËºÅ¿ÉÄÜÏàÍ¬µÄÎÊÌâÉĞÎ´½â¾ö.
+		printf("è¯·è¾“å…¥6-13ä½çº¯æ•°å­—è´¦å·ï¼š  ");//è¿™é‡Œè¿˜æœ‰ä¸€ä¸ªè´¦å·å¯èƒ½ç›¸åŒçš„é—®é¢˜å°šæœªè§£å†³.
 		scanf_s("%s", &ID, 13);		
 		fflush(stdin);
 		if (judgeNumsFormat() == 1) {
 			break;
-		}
+		}//åº”è¯¥å¢æ·»strcmp(loginInformation[i].login_ID,ID)ï¼Œåˆ¤æ–­æ˜¯å¦å·²ç»å­˜åœ¨è¯¥ç”¨æˆ·åã€‚ 
 	}
 
 	while (true)
 	{
-		printf("ÇëÊäÈë6-13Î»ÃÜÂë£¬½öÓÉÊı×ÖºÍ×ÖÄ¸¹¹³É£º  ");
+		printf("è¯·è¾“å…¥6-13ä½å¯†ç ï¼Œä»…ç”±æ•°å­—å’Œå­—æ¯æ„æˆï¼š  ");
 		scanf_s("%s", &Passworda, 13);
 		fflush(stdin);
-		printf("ÇëÔÙ´ÎÊäÈëÃÜÂë£º  ");
+		printf("è¯·å†æ¬¡è¾“å…¥å¯†ç ï¼š  ");
 		scanf_s("%s", &Passwordb, 13);
 		fflush(stdin);
 		if (judgePasswordFormat(Passworda) == 1 && judgePasswordFormat(Passwordb)==1 &&strcmp(Passworda,Passwordb)==0){
@@ -84,7 +84,7 @@ void mSignUp() {
 
 	while(true)
 	{
-		printf("ÇëÊäÈë1Î»Êı×Ö´ú±íÈ¨ÏŞ£º	£¨0Îª³¬¼¶¹ÜÀíÔ±£¬1Îª¹ÜÀíÔ±£¬2ÎªÓÃ»§£©");
+		printf("è¯·è¾“å…¥1ä½æ•°å­—ä»£è¡¨æƒé™ï¼š	ï¼ˆ0ä¸ºè¶…çº§ç®¡ç†å‘˜ï¼Œ1ä¸ºç®¡ç†å‘˜ï¼Œ2ä¸ºç”¨æˆ·ï¼‰");
 		getchar();
 		scanf_s("%c", &thePermission, 1);
 		fflush(stdin);
@@ -93,20 +93,20 @@ void mSignUp() {
 		}
 	}
 	
-	//ÎÄ¼ş¼ÓÈëÕËºÅ
+	//æ–‡ä»¶åŠ å…¥è´¦å·
 	fputs(ID, fp);
 	fputs("#", fp);
-	//¼ÓÈëÃÜÂë
+	//åŠ å…¥å¯†ç 
 	fputs(Passworda, fp);
 	fputs("#", fp);
-	//¼ÓÈëÈ¨ÏŞ
+	//åŠ å…¥æƒé™
 	fputc(thePermission, fp);
 	fputc('\n', fp);
 
-	printf("×¢²á³É¹¦\n\n");
+	printf("æ³¨å†ŒæˆåŠŸ\n\n");
 	fclose(fp);
 	Sleep(1000);
-	system("cls");//ÇåÆÁ
+	system("cls");//æ¸…å±
 
 	initFileData();
 	mLogin();
@@ -119,7 +119,7 @@ void initFileData() {
 
 	fp = fopen("database.txt", "r");
 	if (fp == NULL) {
-		printf("ÎÄ¼ş¶ÁÈ¡Ê§°Ü£¡");
+		printf("æ–‡ä»¶è¯»å–å¤±è´¥ï¼");
 		return;
 	}
 
@@ -136,7 +136,7 @@ void initFileData() {
 			temp[i] = strLine[i];
 		}
 		strcpy(loginInformation[IDnums].login_ID, temp);
-		printf("ÕËºÅ£º%s\n", loginInformation[IDnums].login_ID);
+		printf("è´¦å·ï¼š%s\n", loginInformation[IDnums].login_ID);
 
 
 		memset(temp, '\0', sizeof(temp));
@@ -149,8 +149,8 @@ void initFileData() {
 		strcpy(loginInformation[IDnums].login_Password, temp);
 		thePermission = strLine[j + 1];
 		loginInformation[IDnums].login_Permission = thePermission;
-		printf("ÃÜÂë£º%s\n", loginInformation[IDnums].login_Password);
-		printf("È¨ÏŞ£º%c\n", loginInformation[IDnums].login_Permission);
+		printf("å¯†ç ï¼š%s\n", loginInformation[IDnums].login_Password);
+		printf("æƒé™ï¼š%c\n", loginInformation[IDnums].login_Permission);
 
 		IDnums++;
 	}
@@ -162,10 +162,10 @@ void mLogin() {
 	char lID[13];
 	char lPassword[13];
 	
-	printf("ÕËºÅ£º\t");
+	printf("è´¦å·ï¼š\t");
 	scanf_s("%s",&lID,13);
 	fflush(stdin);
-	printf("ÃÜÂë£º\t");
+	printf("å¯†ç ï¼š\t");
 	scanf_s("%s", &lPassword, 13);
 	fflush(stdin);
 	
@@ -176,15 +176,15 @@ void mLogin() {
 			switch (loginInformation[i].login_Permission)
 			{
 			case'0':
-				printf("³¬¼¶¹ÜÀíÔ±µÇÂ¼³É¹¦\n");
+				printf("è¶…çº§ç®¡ç†å‘˜ç™»å½•æˆåŠŸ\n");
 				mSuperAdminEntrance();
 				break;
 			case'1':
-				printf("¹ÜÀíÔ±µÇÂ¼³É¹¦\n");
+				printf("ç®¡ç†å‘˜ç™»å½•æˆåŠŸ\n");
 				mAdminEntrance();
 				break;
 			case'2':
-				printf("ÓÃ»§µÇÂ¼³É¹¦\n");
+				printf("ç”¨æˆ·ç™»å½•æˆåŠŸ\n");
 				mUserEntrance();
 				break;
 			default:
@@ -195,7 +195,7 @@ void mLogin() {
 		}
 	}
 	if (!flag) {
-		printf("µÇÂ¼Ê§°Ü");
+		printf("ç™»å½•å¤±è´¥");
 	}
 
 	system("pause");
@@ -205,13 +205,13 @@ void mLogin() {
 void printPrompt() {
 	printf("   _______________________________________\n");
 	printf("   |                                      |\n");
-	printf("   |                ÇëÑ¡Ôñ                |\n");
+	printf("   |                è¯·é€‰æ‹©                |\n");
 	printf("   |                                      |\n");
-	printf("   |         ÎÒÒÑÓĞÕË»§¡ª¡ªÇë°´ 0         |\n");
+	printf("   |         æˆ‘å·²æœ‰è´¦æˆ·â€”â€”è¯·æŒ‰ 0         |\n");
 	printf("   |                                      |\n");
-	printf("   |         ÎÒÊÇĞÂÓÃ»§¡ª¡ªÇë°´ 1         |\n");
+	printf("   |         æˆ‘æ˜¯æ–°ç”¨æˆ·â€”â€”è¯·æŒ‰ 1         |\n");
 	printf("   |______________________________________|\n");
-	printf("\tÇëÊäÈë\t\t");
+	printf("\tè¯·è¾“å…¥\t\t");
 }
 
 int main() {
@@ -235,13 +235,13 @@ int main() {
 	return 0;
 }
 void mSuperAdminEntrance() {
-	printf("³¬¼¶¹ÜÀíÔ±Èë¿Úok");
+	printf("è¶…çº§ç®¡ç†å‘˜å…¥å£ok");
 };
 
 void mAdminEntrance() {
-	printf("¹ÜÀíÔ±Èë¿Úok");
+	printf("ç®¡ç†å‘˜å…¥å£ok");
 };
 
 void mUserEntrance() {
-	printf("ÓÃ»§Èë¿Úok");
+	printf("ç”¨æˆ·å…¥å£ok");
 };
